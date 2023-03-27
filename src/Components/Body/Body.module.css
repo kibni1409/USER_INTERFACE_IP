@@ -1,0 +1,10 @@
+.contentStyle {
+    font-size: calc( (100vw - 480px)/(1280 - 480) * (24 - 16) + 16px);
+    text-align: center;
+    min-height: 80vh;
+    color: #fff;
+    background-color: #DCDCDC;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
