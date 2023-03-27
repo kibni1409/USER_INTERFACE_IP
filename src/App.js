@@ -7,6 +7,8 @@ import SingIn from "./Components/Body/SingIn/SingIn";
 import {Outlet, Route, Routes} from "react-router-dom";
 import ListStore from "./Components/Body/ListStore/ListStore";
 import ListProducts from "./Components/Body/ListProducts/ListProducts";
+import Scan from "./Components/Scan";
+import GenerateQR from "./Components/GenetateQR";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Outlet />
         <Routes>
           <Route path={'/sing-in'} element={<SingIn />} />
+          <Route path={'/scan'} element={<Scan />} />
+          <Route path={'/generate'} element={<GenerateQR />} />
           <Route path={'/store'} element={<ListStore />} />
           <Route path={'/products'} element={<ListProducts />} />
         </Routes>

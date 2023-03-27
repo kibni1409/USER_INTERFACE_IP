@@ -24,6 +24,12 @@ const HeaderComp = () => {
     return (
       <div>
         <Button type={'primary'}>
+          <NavLink to="/generate">QR</NavLink>
+        </Button>
+        <Button type={'primary'}>
+          <NavLink to="/scan">Camera</NavLink>
+        </Button>
+        <Button type={'primary'}>
           <NavLink to="/store">Store</NavLink>
         </Button>
         <Button type={'primary'}>
