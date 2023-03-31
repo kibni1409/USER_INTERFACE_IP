@@ -1,0 +1,14 @@
+.MenuJS {
+    display: flex;
+    max-width: 260px;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.MenuList {
+    height: 80vh;
+    max-width: 256px;
+    z-index: 10;
+}

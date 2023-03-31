@@ -1,13 +1,14 @@
 import QrReader from 'react-qr-scanner'
 import { useState} from "react";
 import {Button} from "antd";
+import './Scan.css'
 const Scan = () => {
   let delay = 100
   const [result, setResult] = useState()
   const [camera, setCamera] = useState('true')
   const previewStyle = {
-    height: 540,
-    width: 620,
+    height: 350,
+    width: 500,
   }
   function handleScan(data){
     if(data) setResult(data.text)
@@ -16,7 +17,7 @@ const Scan = () => {
     console.error(err)
   }
   return (
-    <div>
+    <div className='Scan'>
       <Button onClick={() => setCamera(!camera)} >
         {camera === true ? 'Close' : 'Open'}
       </Button>

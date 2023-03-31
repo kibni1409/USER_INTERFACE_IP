@@ -1,0 +1,28 @@
+.App {
+  font-size: 20px;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+  min-width: 400px;
+  width: 100vw;
+  @media (min-width: 300px) and (max-width: 550px) {
+    & {
+      font-size: 25px;
+    }
+  }
+  // Планшетный вариант
+  @media (min-width: 551px) and (max-width: 1119px) {
+    & {
+      font-size: 23px;
+    }
+  }
+  // Дескторный вариант
+  @media (min-width: 1220px) and (max-width: 1980px) {
+    & {
+      font-size: 20px;
+    }
+  }
+}

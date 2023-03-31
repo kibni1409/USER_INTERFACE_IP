@@ -1,5 +1,4 @@
 .footerStyle {
-    font-size: calc( (100vw - 480px)/(1280 - 480) * (24 - 16) + 16px);
     text-align: center;
     height: 10vh;
     color: #fff;

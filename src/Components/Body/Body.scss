@@ -1,0 +1,29 @@
+.contentStyle {
+    text-align: center;
+    height: 80vh;
+    width: 100vw;
+    color: #000000;
+    background-color: #DCDCDC;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    //@media (min-width: 300px) and (max-width: 550px) {
+    //  & {
+    //    min-width: 400px;
+    //    width: 100vw;
+    //  }
+    //}
+    //// Планшетный вариант
+    //@media (min-width: 551px) and (max-width: 1119px) {
+    //  & {
+    //    width: 100vw;
+    //  }
+    //}
+    //// Дескторный вариант
+    //@media (min-width: 1220px) and (max-width: 1980px) {
+    //  & {
+    //    width: 100vw;
+    //  }
+    //}
+}

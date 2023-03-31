@@ -1,7 +1,7 @@
-import Style from './Body.module.css'
+import './Body.css'
 const Body = (props) => {
   return (
-    <div className={Style.contentStyle}>
+    <div className='contentStyle'>
       {props.children}
     </div>
   )

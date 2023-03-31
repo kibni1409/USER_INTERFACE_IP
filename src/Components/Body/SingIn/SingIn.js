@@ -2,13 +2,22 @@ import {Button, Checkbox, Form, Input} from "antd";
 import {SingInThunk} from "../../../Redux/UserSlice/UserSlice";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import {getLocalStorage} from "../../../Redux/WorkWithLocalStorage";
+import {useEffect} from "react";
+import {RouteStore} from "../../../App";
 
 const SingIn = () => {
   const navigate = useNavigate()
   const dispatch= useDispatch()
+  const user = getLocalStorage('user')
+  useEffect(() => {
+    if (user !== null){
+      navigate(RouteStore)
+    }
+  }, [])
   const onFinish = (values) => {
     dispatch(SingInThunk({login:values.login, password:values.password}))
-    navigate('/store')
+    navigate(RouteStore)
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
