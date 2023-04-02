@@ -1,11 +1,13 @@
 import {Card} from "antd";
+import './ListStore.css'
 
 const CardProduct = (props) => {
   return (
-    <div>
-      <Card title={props.el.code} style={{ width: 300, marginBottom: 20 }}>
-        <p>Data (Days): {props.el.data}</p>
-        <p>Amount: {props.el.amount}</p>
+    <div className='CardStore'>
+      <Card title={'Наименование: ' + props.el.name}>
+        <p>Код товара: {props.el.code}</p>
+        <p>Дата поступления: {props.el.data}</p>
+        <p>Кол-во: {props.el.amount}</p>
       </Card>
     </div>
   )

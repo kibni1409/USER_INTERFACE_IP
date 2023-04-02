@@ -4,8 +4,8 @@ import {createRef, forwardRef, useEffect, useState} from "react";
 import './GenerateQR.css'
 import {useReactToPrint} from "react-to-print";
 import {useDispatch, useSelector} from "react-redux";
-import {getLocalStorage} from "../Redux/WorkWithLocalStorage";
-import {getProductsThunk} from "../Redux/ProductsSlice/ProductsSlice";
+import {getLocalStorage} from "../../../Redux/WorkWithLocalStorage";
+import {getProductsThunk} from "../../../Redux/ProductsSlice/ProductsSlice";
 
 
 const GenerateQR = () => {
@@ -51,22 +51,23 @@ const GenerateQR = () => {
   const ref = createRef();
   return (
     <div className='Form'>
+      <h3>Добавление товара</h3>
       <Form
         name="basic"
-        labelCol={{ span: 8 }}
+        className='FormInputs'
+        labelCol={{ span: 6 }}
         wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item
+          className='label'
           label="Name products"
           name="name"
           rules={[{ required: true, message: 'Please input name product!' }]}
         >
           <Select
-            style={{ width: 120 }}
             onChange={handleChange}
             options={SelectorOptions}
           />
@@ -80,7 +81,7 @@ const GenerateQR = () => {
         </Form.Item>
 
       </Form>
-      <QRCodeSVG value={code}/>
+      <QRCodeSVG value={code} className='FormQR'/>
       <p>
         <span>{code} </span>
         <span>{date.toLocaleDateString("en-GB")} </span>

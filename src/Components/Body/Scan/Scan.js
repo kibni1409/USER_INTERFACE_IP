@@ -3,12 +3,13 @@ import { useState} from "react";
 import {Button} from "antd";
 import './Scan.css'
 const Scan = () => {
-  let delay = 100
+  let delay = 1000
   const [result, setResult] = useState()
   const [camera, setCamera] = useState('true')
   const previewStyle = {
-    height: 350,
-    width: 500,
+    height: 300,
+    width: 350,
+    padding: 20
   }
   function handleScan(data){
     if(data) setResult(data.text)

@@ -4,6 +4,7 @@ import {getProductsThunk} from "../../../Redux/ProductsSlice/ProductsSlice";
 import {getLocalStorage} from "../../../Redux/WorkWithLocalStorage";
 import CardProduct from "./CardProduct";
 import './ListProducts.css'
+import {Spin} from "antd";
 
 const ProductsStore = () => {
   const stateProducts = useSelector((state) => state.Products)
@@ -20,7 +21,7 @@ const ProductsStore = () => {
   }, [])
   return (
     <div className='ListProduct'>
-      {ElementsProducts}
+      {stateProducts.loading === false ? ElementsProducts : <Spin />}
     </div>
   )
 }

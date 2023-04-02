@@ -9,6 +9,79 @@
 
 .MenuList {
     height: 80vh;
-    max-width: 256px;
     z-index: 10;
+}
+
+.ButtonMenuJS {
+    width: 70px;
+    height: 70px;
+    padding: 0;
+
+    span {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        svg{
+            width: 50px;
+            height: 50px;
+        }
+    }
+
+    @media screen and (max-width: 1000px) {
+        & {
+            width: 10vh;
+            height: 10vh;
+        }
+        span {
+            width: 10vh;
+            margin: 0;
+            svg {
+                width: 6vh;
+                height: 6vh;
+                margin: 25% 0 ;
+            }
+        }
+    }
+}
+
+.DrawerMenuJS {
+    .ant-menu-submenu-title {
+        background-color: #efefef;
+    }
+    background-color: white;
+
+    @media screen and (max-width: 1000px){
+        .ant-drawer-title {
+           // font-size: 2.2vh;
+        }
+        .ant-menu-item{
+            height: 7vh;
+        }
+        .ant-menu-submenu  {
+            .ant-menu-submenu-title {
+                height: 7vh;
+            }
+            li {
+                height: 7vh;
+            }
+            span {
+                height: 7vh;
+            }
+        }
+      span {
+          font-size: 2vh;
+          height: 7vh;
+          text-align: center;
+          justify-content: center;
+          display: flex;
+          flex-direction: column;
+
+          svg {
+              width: 3vh;
+              height: 3vh;
+          }
+      }
+    }
 }

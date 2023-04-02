@@ -4,6 +4,7 @@ import {getStoreThunk} from "../../../Redux/StoreSlice/StoreSlice";
 import {getLocalStorage} from "../../../Redux/WorkWithLocalStorage";
 import './ListStore.css'
 import CardStore from "./CardStore";
+import {Spin} from "antd";
 
 const ListStore = () => {
   const stateStore = useSelector((state) => state.Store)
@@ -18,9 +19,12 @@ const ListStore = () => {
       dispatch(getStoreThunk({storeID: user.store}))
     }
   }, [])
+  useEffect(() => {
+
+  }, [stateStore.loading])
   return (
-    <div className='List'>
-      {ElementsStore}
+    <div className='ListStore'>
+      {stateStore.loading === false ? ElementsStore : <Spin/>}
     </div>
   )
 }

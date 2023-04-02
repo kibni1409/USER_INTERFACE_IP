@@ -8,7 +8,7 @@ import {Outlet, Route, Routes} from "react-router-dom";
 import ListStore from "./Components/Body/ListStore/ListStore";
 import ListProducts from "./Components/Body/ListProducts/ListProducts";
 import Scan from "./Components/Body/Scan/Scan";
-import GenerateQR from "./Components/GenetateQR";
+import GenerateQR from "./Components/Body/AddStore/GenetateQR";
 import MenuJS from "./Components/Body/MenuJS/MenuJS";
 import AddProduct from "./Components/Body/AddProduct/AddProduct";
 import {getLocalStorage} from "./Redux/WorkWithLocalStorage";
@@ -43,7 +43,7 @@ function App() {
         </Routes>
       </Body>
       <Footer>
-        Ant Design ©2023 Created by Ant UED
+        Ant Design ©2023
       </Footer>
     </div>
   )

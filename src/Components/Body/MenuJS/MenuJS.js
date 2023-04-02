@@ -34,13 +34,14 @@ function getItem(label, key, icon, children, type) {
 }
 const MenuJS = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate()
   const showDrawer = () => {
     setOpen(true);
   };
   const onCloseDrawer = () => {
     setOpen(false);
   };
-  const navigate = useNavigate()
+
   const items = [
     getItem('Store', 'sub1', <ShopOutlined />, [
       getItem('Show All', 'store', <ShoppingCartOutlined />),
@@ -51,8 +52,7 @@ const MenuJS = () => {
       getItem('Show All', 'products', <AppstoreOutlined />),
       getItem('Add new products', 'products-add', <AppstoreAddOutlined />),
     ]),
-    getItem('Profile', 'grp', null, [
-      getItem('LogOut', 'log-out', <ExportOutlined />)], 'group')
+    getItem('LogOut', 'log-out', <ExportOutlined />)
   ]
   const onClick = (e) => {
     onCloseDrawer()
@@ -89,17 +89,14 @@ const MenuJS = () => {
 
   return (
     <div className='MenuJS'>
-      <Button type="primary" onClick={showDrawer} style={{
-        marginBottom: 16,
-        width: 70,
-        height: 70
-      }}>
-      <MenuFoldOutlined />
+      <Button type="primary" onClick={showDrawer} className='ButtonMenuJS'>
+        <MenuFoldOutlined className='ButtonMenuJS' />
       </Button>
       <Drawer
+        className='DrawerMenuJS'
+        size={'default'}
         title="Drawer with extra actions"
         placement={'left'}
-        width={300}
         onClose={onCloseDrawer}
         open={open}
       >

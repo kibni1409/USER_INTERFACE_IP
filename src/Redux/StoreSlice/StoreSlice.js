@@ -16,7 +16,8 @@ export const getStoreThunk = createAsyncThunk(
 const StoreSlice = createSlice({
   name: 'StoreSlice',
   initialState: {
-    store: []
+    store: [],
+    loading: false,
   },
   reducers: {
     setStoreAC(state, { payload }) {
@@ -24,9 +25,9 @@ const StoreSlice = createSlice({
     }
   },
   extraReducers: {
-    [getStoreThunk.pending]: () => {},
-    [getStoreThunk.fulfilled]: () => {},
-    [getStoreThunk.rejected]: () => {},
+    [getStoreThunk.pending]: (state) => { state.loading = true },
+    [getStoreThunk.fulfilled]: (state) => { state.loading = false },
+    [getStoreThunk.rejected]: (state) => { state.loading = false },
   },
 })
 export const { setStoreAC } = StoreSlice.actions

@@ -9,11 +9,36 @@
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: start;
-  width: 320px;
+  width: 520px;
   height: 80vh;
   margin: 0 auto;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding-top: 10px;
+}
+@media screen and (max-width: 1000px) {
+  .ListProduct {
+    width: 90vw;
+  }
+}
+
+.CardProduct {
+  width: 500px;
+  margin-bottom: 20px;
+}
+@media screen and (max-width: 1000px) {
+  .CardProduct {
+    width: 90vw;
+  }
+}
+
+.ImageProduct {
+  width: 400px;
+}
+@media screen and (max-width: 1000px) {
+  .ImageProduct {
+    width: 80vw;
+  }
 }
 
 .ListProduct::-webkit-scrollbar-track {

@@ -16,7 +16,8 @@ export const getProductsThunk = createAsyncThunk(
 const ProductsSlice = createSlice({
   name: 'ProductsSlice',
   initialState: {
-    products: []
+    products: [],
+    loading: false,
   },
   reducers: {
     setProductsAC(state, { payload }) {
@@ -24,9 +25,9 @@ const ProductsSlice = createSlice({
     }
   },
   extraReducers: {
-    [getProductsThunk.pending]: () => {},
-    [getProductsThunk.fulfilled]: () => {},
-    [getProductsThunk.rejected]: () => {},
+    [getProductsThunk.pending]: (state) => { state.loading = true},
+    [getProductsThunk.fulfilled]: (state) => { state.loading = false},
+    [getProductsThunk.rejected]: (state) => {state.loading = false},
   },
 })
 export const { setProductsAC } = ProductsSlice.actions

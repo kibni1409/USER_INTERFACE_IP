@@ -1,27 +1,53 @@
-.List {
+.ListStore {
   display: flex;
   flex-direction: column;
   justify-content: start;
-  width: 320px;
+  width: 520px;
   height: 80vh;
   margin: 0 auto;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding-top: 10px;
+
+  @media screen and (max-width: 1000px) {
+    & {
+      width: 90vw;
+      //font-size: 20px;
+    }
+  }
 }
-.List::-webkit-scrollbar-track
+
+.CardStore{
+  width: 500px;
+  margin-bottom: 20px;
+
+  @media screen and (max-width: 1000px) {
+    & {
+      width: 90vw;
+     // font-size: 30px;
+    }
+    p {
+      //font-size: 30px;
+    }
+    div {
+      //font-size: 50px
+    }
+  }
+}
+.ListStore::-webkit-scrollbar-track
 {
   -webkit-box-shadow: inset 0 0 6px rgba(61, 91, 215, 0.3);
   border-radius: 10px;
   background-color: #F5F5F5;
 }
 
-.List::-webkit-scrollbar
+.ListStore::-webkit-scrollbar
 {
   width: 12px;
   background-color: #F5F5F5;
 }
 
-.List::-webkit-scrollbar-thumb
+.ListStore::-webkit-scrollbar-thumb
 {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(61, 91, 215, 0.3);
