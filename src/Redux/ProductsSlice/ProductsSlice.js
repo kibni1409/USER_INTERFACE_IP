@@ -13,6 +13,18 @@ export const getProductsThunk = createAsyncThunk(
   }
 )
 
+export const postProductsThunk = createAsyncThunk(
+  'products/postProductsThunk',
+  async function ({ productsArray, productsID }, { rejectWithValue, dispatch }) {
+    try {
+      let response = await ProductsAPI.postProducts(productsID)
+      dispatch(ProductsSlice.actions.setProductsAC(response))
+    } catch (error) {
+      rejectWithValue(error)
+    }
+  }
+)
+
 const ProductsSlice = createSlice({
   name: 'ProductsSlice',
   initialState: {

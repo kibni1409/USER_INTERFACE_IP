@@ -13,6 +13,18 @@ export const getStoreThunk = createAsyncThunk(
   }
 )
 
+export const putStoreThunk = createAsyncThunk(
+  'store/putStoreThunk',
+  async function ({ storeArray, totalCount, nextID, storeID }, { rejectWithValue, dispatch }) {
+    try {
+      let response = await StoreAPI.putStore(storeArray, totalCount, nextID, storeID)
+      dispatch(StoreSlice.actions.setStoreAC(response))
+    } catch (error) {
+      rejectWithValue(error)
+    }
+  }
+)
+
 const StoreSlice = createSlice({
   name: 'StoreSlice',
   initialState: {
@@ -21,7 +33,9 @@ const StoreSlice = createSlice({
   },
   reducers: {
     setStoreAC(state, { payload }) {
-      state.store = payload
+      state.store = payload.store
+      state.totalCount = payload.totalCount
+      state.nextID = payload.nextID
     }
   },
   extraReducers: {

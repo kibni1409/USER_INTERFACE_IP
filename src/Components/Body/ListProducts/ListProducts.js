@@ -21,7 +21,7 @@ const ProductsStore = () => {
   }, [])
   return (
     <div className='ListProduct'>
-      {stateProducts.loading === false ? ElementsProducts : <Spin />}
+      {stateProducts.loading === false ? ElementsProducts.reverse() : <Spin />}
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  baseURL: 'http://192.168.0.8:8081',
+  baseURL: 'http://192.168.0.6:8081',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -20,7 +20,15 @@ export const UserAPI = {
 
 export const StoreAPI = {
   getStore(storeID) {
-    return instance.get('/store/' + storeID).then((response) => response.data.store)
+    return instance.get('/store/' + storeID).then((response) => response.data)
+  },
+  putStore(storeArray, totalCount, nextID, storeID) {
+    return instance.put('/store/edit/', {
+      storeID,
+      storeArray,
+      totalCount,
+      nextID
+    }).then((response) => response.data)
   }
 }
 

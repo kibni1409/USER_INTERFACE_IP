@@ -6,6 +6,8 @@ import {useReactToPrint} from "react-to-print";
 import {useDispatch, useSelector} from "react-redux";
 import {getLocalStorage} from "../../../Redux/WorkWithLocalStorage";
 import {getProductsThunk} from "../../../Redux/ProductsSlice/ProductsSlice";
+import {getStoreThunk, putStoreThunk} from "../../../Redux/StoreSlice/StoreSlice";
+import store from "../../../Redux/Store";
 
 
 const GenerateQR = () => {
@@ -13,6 +15,7 @@ const GenerateQR = () => {
   const dispatch = useDispatch()
   const stateUser = getLocalStorage('user')
   const stateProducts = useSelector((state) => state.Products)
+  const stateStore = useSelector((state) => state.Store)
   let SelectorOptions = []
   stateProducts.products.map((el) =>  SelectorOptions.push({ value: el.name, label: el.name }))
   const [code, setCode] = useState('')
@@ -21,8 +24,34 @@ const GenerateQR = () => {
   const handlePrint = useReactToPrint({
     content: () => ref.current,
   })
+  function AddStore() {
+    let product = stateProducts.products.find((el) => el.name === code)
+    let dateNew = new Date()
+    let arrayProductCode = []
+    for ( let i = 0; i < value; i++ ){
+      let dataForArray = code + '_' + (i+1) + ' ' + date.toLocaleDateString("en-GB")
+      arrayProductCode.push(dataForArray)
+    }
+    let object = {
+      id: stateStore.nextID,
+      name: code,
+      code: product.code,
+      data: dateNew.toLocaleDateString("en-GB"),
+      amount: value,
+      arrayqr: arrayProductCode
+    }
+    let newArray = [...stateStore.store, object]
+    dispatch(putStoreThunk({
+      storeArray: newArray,
+      totalCount: newArray.length,
+      nextID: stateStore.nextID + 1,
+      storeID: stateUser.store
+    }))
+    // console.log(newArray, newArray.length, stateStore.nextID + 1, stateUser.store)
+  }
   useEffect(() => {
     dispatch(getProductsThunk({productsID: stateUser.products}))
+    dispatch(getStoreThunk( {storeID: stateUser.store}))
   }, [])
   const handleChange = (value) => {
     setCode(value)
@@ -63,9 +92,9 @@ const GenerateQR = () => {
       >
         <Form.Item
           className='label'
-          label="Name products"
+          label="Наименование товара"
           name="name"
-          rules={[{ required: true, message: 'Please input name product!' }]}
+          rules={[{ required: true, message: 'Пожалуйста, укажите товар!' }]}
         >
           <Select
             onChange={handleChange}
@@ -73,9 +102,9 @@ const GenerateQR = () => {
           />
         </Form.Item>
         <Form.Item
-          label="Number products"
+          label="Кол-во товара"
           name="number"
-          rules={[{ required: true, message: 'Please input number!' }]}
+          rules={[{ required: true, message: 'Пожалуйста, укажите кол-во!' }]}
         >
           <InputNumber onChange={OnChangeNumber}/>
         </Form.Item>
@@ -91,7 +120,10 @@ const GenerateQR = () => {
           {ElementToPrint}
         </FancyButton>
       </div>
-      {code !== '' ? <Button onClick={handlePrint}>  Print </Button> : null}
+      {code !== '' ? <Button onClick={() => {
+        handlePrint()
+        AddStore()
+      }}>  Print </Button> : null}
     </div>
   )
 }
