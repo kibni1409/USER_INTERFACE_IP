@@ -1,6 +1,6 @@
 import {
   MenuFoldOutlined,
-  MenuUnfoldOutlined,
+  ShoppingOutlined,
   DatabaseOutlined,
   BarcodeOutlined,
   AppstoreAddOutlined,
@@ -17,7 +17,7 @@ import {useNavigate} from "react-router-dom";
 import {
   RouteProducts,
   RouteProductsAdd,
-  RouteProductsDelete, RouteSignIN,
+  RouteProductsDelete, RouteSale, RouteSignIN,
   RouteStore,
   RouteStoreAdd,
   RouteStoreDelete
@@ -43,14 +43,15 @@ const MenuJS = () => {
   };
 
   const items = [
-    getItem('Store', 'sub1', <ShopOutlined />, [
-      getItem('Show All', 'store', <ShoppingCartOutlined />),
-      getItem('Accept the product', 'store-add', <SelectOutlined />),
-      getItem('Discard', 'store-delete',<BarcodeOutlined />),
+    getItem('Хранилище', 'sub1', <ShopOutlined />, [
+      getItem('Продать', 'sale',<ShoppingOutlined />),
+      getItem('Показать все', 'store', <ShoppingCartOutlined />),
+      getItem('Принять продукт', 'store-add', <SelectOutlined />),
+      getItem('Списание', 'store-delete',<BarcodeOutlined />),
     ]),
-    getItem('Products', 'sub2', <DatabaseOutlined />, [
-      getItem('Show All', 'products', <AppstoreOutlined />),
-      getItem('Add new products', 'products-add', <AppstoreAddOutlined />),
+    getItem('Продукты', 'sub2', <DatabaseOutlined />, [
+      getItem('Показать все', 'products', <AppstoreOutlined />),
+      getItem('Создать карточку продукта', 'products-add', <AppstoreAddOutlined />),
     ]),
     getItem('LogOut', 'log-out', <ExportOutlined />)
   ]
@@ -59,6 +60,9 @@ const MenuJS = () => {
     switch(e.key){
       case 'store':
         navigate(RouteStore)
+        break
+      case 'sale':
+        navigate(RouteSale)
         break
       case 'store-add':
         navigate(RouteStoreAdd)
@@ -95,7 +99,6 @@ const MenuJS = () => {
       <Drawer
         className='DrawerMenuJS'
         size={'default'}
-        title="Drawer with extra actions"
         placement={'left'}
         onClose={onCloseDrawer}
         open={open}

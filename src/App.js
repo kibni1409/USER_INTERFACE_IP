@@ -16,6 +16,7 @@ import {getLocalStorage} from "./Redux/WorkWithLocalStorage";
 
 export const RouteSignIN = '/sign-in'
 export const RouteStore = '/store'
+export const RouteSale = '/store/sale'
 export const RouteStoreAdd = '/store-add'
 export const RouteStoreDelete = '/store-delete'
 export const RouteProducts = '/products'
@@ -35,6 +36,7 @@ function App() {
         <Routes>
           <Route path={'/'} element={<SingIn />} />
           <Route path={RouteSignIN} element={<SingIn />} />
+          <Route path={RouteSale} element={<GenerateQR />} />
           <Route path={RouteStoreDelete} element={<Scan />} />
           <Route path={RouteStoreAdd} element={<GenerateQR />} />
           <Route path={RouteProductsAdd} element={<AddProduct />} />
