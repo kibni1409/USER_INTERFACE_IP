@@ -10,7 +10,7 @@ import {
   ExportOutlined,
   ShoppingCartOutlined
 } from "@ant-design/icons";
-import {Button, Drawer, Menu, Space} from "antd";
+import {Button, Drawer, Menu} from "antd";
 import {useState} from "react";
 import './MenuJS.css'
 import {useNavigate} from "react-router-dom";
@@ -23,6 +23,8 @@ import {
   RouteStoreDelete
 } from "../../../App";
 import {deleteLocalStorage} from "../../../Redux/WorkWithLocalStorage";
+
+// Создание элементов меню
 function getItem(label, key, icon, children, type) {
   return {
     key,
@@ -33,15 +35,21 @@ function getItem(label, key, icon, children, type) {
   };
 }
 const MenuJS = () => {
-  const [open, setOpen] = useState(false);
-  const navigate = useNavigate()
+
+  const [open, setOpen] = useState(false) // Режим выпадающей панели
+  const navigate = useNavigate() // Навигатор по страницам
+
+  // Открытие панели
   const showDrawer = () => {
     setOpen(true);
   };
+
+  // Закрытие панели
   const onCloseDrawer = () => {
     setOpen(false);
   };
 
+  // Элементы панели
   const items = [
     getItem('Хранилище', 'sub1', <ShopOutlined />, [
       getItem('Продать', 'sale',<ShoppingOutlined />),
@@ -53,8 +61,10 @@ const MenuJS = () => {
       getItem('Показать все', 'products', <AppstoreOutlined />),
       getItem('Создать карточку продукта', 'products-add', <AppstoreAddOutlined />),
     ]),
-    getItem('LogOut', 'log-out', <ExportOutlined />)
+    getItem('Выход', 'log-out', <ExportOutlined />)
   ]
+
+  // Переход по страницам
   const onClick = (e) => {
     onCloseDrawer()
     switch(e.key){
@@ -113,7 +123,6 @@ const MenuJS = () => {
           items={items}
         />
       </Drawer>
-
     </div>
   )
 }

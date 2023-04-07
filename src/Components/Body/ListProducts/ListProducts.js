@@ -7,18 +7,24 @@ import './ListProducts.css'
 import {Spin} from "antd";
 
 const ProductsStore = () => {
-  const stateProducts = useSelector((state) => state.Products)
+
+  const stateProducts = useSelector((state) => state.Products) // Данные о продуктах
+  const dispatch = useDispatch() // Диспетчер логики
+  let user = getLocalStorage('user') // Данные пользователя
+
+  // Массив карточек продкута
   let ElementsProducts = []
   stateProducts.products.map((el) => {
     ElementsProducts.push(<CardProduct key={el.id} el={el} />)
   })
-  const dispatch = useDispatch()
-  let user = getLocalStorage('user')
+
+  // Получение данных о продуктах
   useEffect(() => {
     if(user !== null){
       dispatch(getProductsThunk({productsID: user.products}))
     }
   }, [])
+
   return (
     <div className='ListProduct'>
       {stateProducts.loading === false ? ElementsProducts.reverse() : <Spin />}

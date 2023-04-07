@@ -7,21 +7,29 @@ import CardStore from "./CardStore";
 import {Spin} from "antd";
 
 const ListStore = () => {
-  const stateStore = useSelector((state) => state.Store)
+  const stateStore = useSelector((state) => state.Store) // Информация о хранилище
+  const dispatch = useDispatch() // Диспетчер логики
+  let user = getLocalStorage('user') //Данные пользователя
+
+  // Массив карточек хранилища
   let ElementsStore = []
   stateStore.store.map((el) => {
     ElementsStore.push(<CardStore key={el.id} el={el} />)
   })
-  const dispatch = useDispatch()
-  let user = getLocalStorage('user')
+
+  // Получение данных о хранилище
   useEffect(() => {
     if(user !== null){
       dispatch(getStoreThunk({storeID: user.store}))
     }
   }, [])
+
+  // Обновиться после загрузки
   useEffect(() => {
 
   }, [stateStore.loading])
+
+
   return (
     <div className='ListStore'>
       {stateStore.loading === false ? ElementsStore : <Spin/>}

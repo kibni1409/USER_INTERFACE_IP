@@ -1,12 +1,13 @@
 import QrReader from 'react-qr-scanner'
 import {useEffect, useState} from "react";
-import {Button} from "antd";
+import {Button, Spin} from "antd";
 import './Scan.css'
 import {useDispatch, useSelector} from "react-redux";
 import {getLocalStorage} from "../../../Redux/WorkWithLocalStorage";
 import {getStoreThunk, putStoreThunk} from "../../../Redux/StoreSlice/StoreSlice";
 import {getProductsThunk} from "../../../Redux/ProductsSlice/ProductsSlice";
 import {CheckOutlined} from "@ant-design/icons";
+
 const Scan = () => {
   // Переменные
   let delay = 1000 // Интервал сканирования
@@ -15,6 +16,7 @@ const Scan = () => {
   const [arrayExp, setArrayExp] = useState([]) // Массив отсканированных продуктов
   const [arrayObj, setArrayObj] = useState([]) // Массив объектов для списания
   const [camera, setCamera] = useState('true') // Режим камеры
+  const [loadingStore, setLoading] = useState(true) // Режим камеры
   const stateStore = useSelector((state) => state.Store) // Стайт хранилища
   const stateProducts = useSelector((state) => state.Products) // Стайт продуктов
   const stateUser = getLocalStorage('user')  // Данные пользователя
@@ -25,16 +27,23 @@ const Scan = () => {
     dispatch(getStoreThunk({storeID: stateUser.store}))
     dispatch(getProductsThunk({productsID: stateUser.products}))
   }, [])
+
+  // Контроль загрузки
+  useEffect(() => {
+    setLoading(stateStore.loading)
+  }, [stateStore.loading])
+
   // Перезарядка камеры
   useEffect(() => {
-    if(camera === false) setCamera(true)
+    if (camera === false) setCamera(true)
   }, [camera])
+
   // Нахождение просрочки
   let ElementsExpiration = []
   let ElementsExpirationArray = []
   let ObjectExpiration = []
   useEffect(() => {
-    if(stateProducts.products.length !== 0){
+    if (stateProducts.products.length !== 0) {
       // Перебираем все хранилище
       stateStore.store.map((obj) => {
         // Находим информацию о продукте
@@ -49,7 +58,10 @@ const Scan = () => {
           ObjectExpiration.push(obj)
         }
       })
-      ElementsExpiration.map((el) =>  ElementsExpirationArray.push(<span key={el}>{el}</span>))
+      // Создание списка элементов
+      ElementsExpiration.map((el) => ElementsExpirationArray.push(<span key={el}>{el}</span>))
+
+      // Запись в массивы
       setArray(ElementsExpirationArray)
       setArrayObj(ObjectExpiration)
     }
@@ -63,9 +75,9 @@ const Scan = () => {
   }
 
   // Сканирование
-  function handleScan(data){
+  function handleScan(data) {
     // Если сканер что то считал
-    if(data){
+    if (data) {
       // Сохраняем результат
       setResult(data.text)
       // Новые массивы
@@ -74,7 +86,7 @@ const Scan = () => {
       // Находим совпадение с результатом сканирования
       array.map((el, index) => {
         if (el.key === data.text) {
-          newArrayExp.push(<span key={el.key}>{el.key}<CheckOutlined /></span>)
+          newArrayExp.push(<span key={el.key}>{el.key}<CheckOutlined/></span>)
         } else {
           newArray.push(el)
         }
@@ -103,28 +115,33 @@ const Scan = () => {
   }
 
   // Ошибка открытия камеры
-  function handleError(err){
+  function handleError(err) {
     console.error(err)
   }
+
   return (
-    <div className='Scan'>
-      <Button onClick={() => setCamera(!camera)} >
-        {camera === true ? 'Close' : 'Open'}
-      </Button>
-      {camera === true ? <QrReader
-        delay={delay}
-        style={previewStyle}
-        onError={handleError}
-        onScan={handleScan}
-      /> : null }
-      <p>
-        {result}
-      </p>
-      <div className='listScan'>
-        {[...arrayExp,...array]}
-      </div>
-       {arrayExp.length !== 0 && array.length === 0 ? <Button onClick={Expiration} >Списать</Button> : null}
-    </div>
+  <div className='Scan'>
+    {loadingStore === true
+      ? <Spin/>
+      : <>
+        <Button onClick={() => setCamera(!camera)}>
+          {camera === true ? 'Close' : 'Open'}
+        </Button>
+        {camera === true ? <QrReader
+          delay={delay}
+          style={previewStyle}
+          onError={handleError}
+          onScan={handleScan}
+        /> : null}
+        <p>
+          {result}
+        </p>
+        <div className='listScan'>
+          {[...arrayExp, ...array]}
+        </div>
+        {arrayExp.length !== 0 && array.length === 0 ? <Button onClick={Expiration}>Списать</Button> : null}
+      </>}
+  </div>
   )
 }
 

@@ -1,30 +1,39 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {StoreAPI} from "../API";
 
+// Запрос на сервер, для получения данных хранилища
 export const getStoreThunk = createAsyncThunk(
   'store/getStoreThunk',
   async function ({ storeID }, { rejectWithValue, dispatch }) {
     try {
+      // Запрос на сервер
       let response = await StoreAPI.getStore(storeID)
+      // Сохраняем результат
       dispatch(StoreSlice.actions.setStoreAC(response))
     } catch (error) {
+      // Обработка ошибок
       rejectWithValue(error)
     }
   }
 )
 
+// Запрос на сервер, для обновления хранилища
 export const putStoreThunk = createAsyncThunk(
   'store/putStoreThunk',
   async function ({ storeArray, totalCount, nextID, storeID }, { rejectWithValue, dispatch }) {
     try {
+      // Запрос на сервер
       let response = await StoreAPI.putStore(storeArray, totalCount, nextID, storeID)
+      // Сохранение результата
       dispatch(StoreSlice.actions.setStoreAC(response))
     } catch (error) {
+      // Обработка ошибок
       rejectWithValue(error)
     }
   }
 )
 
+// Создание слайса для хранилища
 const StoreSlice = createSlice({
   name: 'StoreSlice',
   initialState: {
@@ -39,9 +48,9 @@ const StoreSlice = createSlice({
     }
   },
   extraReducers: {
-    [getStoreThunk.pending]: (state) => { state.loading = true },
-    [getStoreThunk.fulfilled]: (state) => { state.loading = false },
-    [getStoreThunk.rejected]: (state) => { state.loading = false },
+    [getStoreThunk.pending]: (state) => { state.loading = true }, // Начало работы функции
+    [getStoreThunk.fulfilled]: (state) => { state.loading = false }, // Конец работы функции
+    [getStoreThunk.rejected]: (state) => { state.loading = false }, // Ошибка функции
   },
 })
 export const { setStoreAC } = StoreSlice.actions

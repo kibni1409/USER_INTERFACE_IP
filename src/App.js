@@ -12,8 +12,9 @@ import GenerateQR from "./Components/Body/AddStore/GenetateQR";
 import MenuJS from "./Components/Body/MenuJS/MenuJS";
 import AddProduct from "./Components/Body/AddProduct/AddProduct";
 import {getLocalStorage} from "./Redux/WorkWithLocalStorage";
+import Sale from "./Components/Body/Sale/Sale";
 
-
+// Объявление путей для переходов по страницам
 export const RouteSignIN = '/sign-in'
 export const RouteStore = '/store'
 export const RouteSale = '/store/sale'
@@ -23,10 +24,12 @@ export const RouteProducts = '/products'
 export const RouteProductsAdd = '/products-add'
 export const RouteProductsDelete = '/products-delete'
 function App() {
-  const user = getLocalStorage('user')
-  useEffect(() => {
 
-  }, [user])
+  const user = getLocalStorage('user') // Получение пользовательских данных
+
+  // Обновление при изменение данных пользователя
+  useEffect(() => {}, [user])
+
   return (
     <div className='App'>
       <HeaderComp/>
@@ -36,7 +39,7 @@ function App() {
         <Routes>
           <Route path={'/'} element={<SingIn />} />
           <Route path={RouteSignIN} element={<SingIn />} />
-          <Route path={RouteSale} element={<GenerateQR />} />
+          <Route path={RouteSale} element={<Sale />} />
           <Route path={RouteStoreDelete} element={<Scan />} />
           <Route path={RouteStoreAdd} element={<GenerateQR />} />
           <Route path={RouteProductsAdd} element={<AddProduct />} />

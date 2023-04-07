@@ -1,0 +1,25 @@
+.Sale {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    width: 80vw;
+    height: 80vh;
+    padding: 10px;
+}
+
+.listSale{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 80vw;
+    height: 25vh;
+    margin: 0 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 10px;
+    border: 2px solid #a49999;
+    border-radius: 15px;
+    font-size: 16px;
+}

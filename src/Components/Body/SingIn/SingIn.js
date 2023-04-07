@@ -7,18 +7,24 @@ import {useEffect} from "react";
 import {RouteStore} from "../../../App";
 
 const SingIn = () => {
-  const navigate = useNavigate()
-  const dispatch= useDispatch()
-  const user = getLocalStorage('user')
+  const navigate = useNavigate() // Навигатор
+  const dispatch= useDispatch() // Диспетчер
+  const user = getLocalStorage('user') // Инфо о пользователе
+
+  // Перевоз с формы на страницу хранилища
   useEffect(() => {
     if (user !== null){
       navigate(RouteStore)
     }
   }, [])
+
+  // Отправка на сервер данных пользователя
   const onFinish = (values) => {
     dispatch(SingInThunk({login:values.login, password:values.password}))
     navigate(RouteStore)
   };
+
+  // Ошибка при заполнении полей
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
@@ -44,12 +50,12 @@ const SingIn = () => {
         autoComplete="off"
       >
         <Form.Item
-          label="Login"
+          label="Логин"
           name="login"
           rules={[
             {
               required: true,
-              message: 'Please input your login!',
+              message: 'Пожалуйста, введите логин!',
             },
           ]}
         >
@@ -57,12 +63,12 @@ const SingIn = () => {
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          label="Пароль"
           name="password"
           rules={[
             {
               required: true,
-              message: 'Please input your password!',
+              message: 'Пожалуйста, введите пароль!',
             },
           ]}
         >
@@ -77,7 +83,7 @@ const SingIn = () => {
             span: 16,
           }}
         >
-          <Checkbox>Remember me</Checkbox>
+          <Checkbox>Запомнить меня</Checkbox>
         </Form.Item>
 
         <Form.Item
@@ -87,7 +93,7 @@ const SingIn = () => {
           }}
         >
           <Button type="primary" htmlType="submit">
-            Submit
+            Войти
           </Button>
         </Form.Item>
       </Form>

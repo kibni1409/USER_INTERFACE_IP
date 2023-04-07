@@ -8,6 +8,7 @@
   margin: 0 auto;
   min-width: 400px;
   width: 100vw;
+  overflow: hidden;
   @media (min-width: 300px) and (max-width: 550px) {
     & {
       font-size: 25px;
